@@ -30,7 +30,6 @@ class SortComparison {
             }
             a[j+1] = key;
         }
-        //todo: implement the sort
         return a;
     }//end insertionsort
 
@@ -42,8 +41,23 @@ class SortComparison {
      *
      */
     static double [] selectionSort (double a[]){
-
-        //todo: implement the sort
+        for(int i = 0; i < (a.length-1); i++)
+        {
+            int temp = i;
+            for(int j= i+1; j < a.length; j++)
+            {
+                if(a[temp] > a[j])
+                {
+                    temp = j;
+                }
+            }
+            if(temp != i)
+            {
+                double largerValue = a[i];
+                a[i] = a[temp];
+                a[temp] = largerValue;
+            }
+        }
         return null;
     }//end selectionsort
 
