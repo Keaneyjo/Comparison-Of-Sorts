@@ -41,7 +41,7 @@ class SortComparison {
      *
      */
     static double [] selectionSort (double a[]){
-        for(int i = 0; i < (a.length-1); i++)
+        for(int i = 0; i < (a.length-1 ); i++)
         {
             int temp = i;
             for(int j= i+1; j < a.length; j++)
@@ -51,14 +51,9 @@ class SortComparison {
                     temp = j;
                 }
             }
-            if(temp != i)
-            {
-                double largerValue = a[i];
-                a[i] = a[temp];
-                a[temp] = largerValue;
-            }
+            if(temp != i) { a = swap(a, i, temp); }
         }
-        return null;
+        return a;
     }//end selectionsort
 
     /**
@@ -68,45 +63,49 @@ class SortComparison {
      * @return array sorted in ascending order
      *
      */
-    static double [] quickSort (double a[]){
-
-        int q = partition(a, 0, (a.length-1));
-        quickSort(a, 0, q);
-        quickSort(a, q+1, a.length-1);
+    static double [] quickSort(double[] a, int low, int high)
+    {
+        if(low < high) {
+            int q = partition(a, low, high);
+            a = quickSort(a, low, q - 1);
+            a = quickSort(a, q + 1, high);
+        }
         return a;
     }//end quicksort
 
-    private static void quickSort(double[] a, int low, int high)
-    {
-        int q = partition(a, low, high);
-        quickSort(a, low, q);
-        quickSort(a, q+1, high);
-        return;
-    }
-
     private static int partition (double a[], int low, int high)
     {
-        double pivot = a[low];
-        int i = low - 1;
-        int j = high + 1;
-        while(true)
+        /*
+        Step 1 − Choose the highest index value has pivot
+        Step 2 − Take two variables to point left and right of the list excluding pivot
+        Step 3 − left points to the low index
+        Step 4 − right points to the high
+        Step 5 − while value at left is less than pivot move right
+        Step 6 − while value at right is greater than pivot move left
+        Step 7 − if both step 5 and step 6 does not match swap left and right
+        Step 8 − if left ≥ right, the point where they met is new pivot
+         */
+
+        double pivot = a[high];
+        int i = low-1;
+        for(int j = low; j < high -1; j++)
         {
-            while(a[j] <= pivot) {j--;}
-            while(a[i] >= pivot) {i++;}
-            if(a[i] < a[j]) {swap(a, i, j);}
-            else {
-                swap(a, i, j);
-                return j;
+            if(a[j] <= pivot)
+            {
+                i++;
+                a = swap(a, i, j);
             }
         }
+        a = swap(a, i+1, high);
+        return i+1;
     }
 
-    private static void swap(double [] a, int i, int j)
+    private static double [] swap(double [] a, int i, int j)
     {
         double temp = a[i];
         a[i] = a[j];
         a[j] = temp;
-        return;
+        return a;
     }
 
     /**
