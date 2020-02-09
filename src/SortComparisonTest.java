@@ -84,7 +84,7 @@ public class SortComparisonTest
     public void testMergeSortIterative()
     {
         double[] a = new double[] {1, 3, 2, 4, 0};
-        a = SortComparison.mergeSortIterative(a);
+        a = SortComparison.mergeSortIterative(a, 0, a.length-1);
         double[] result = new double[] {0, 1, 2, 3, 4};
         Assert.assertArrayEquals("Merge Sort Iterative: True", result, a, 0);
 

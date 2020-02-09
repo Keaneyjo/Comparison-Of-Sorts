@@ -123,10 +123,20 @@ class SortComparison {
      * @return after the method returns, the array must be in ascending sorted order.
      */
 
-    static double[] mergeSortIterative (double a[]) {
+    static double[] mergeSortIterative (double a[], int high) {
+        for (int curr_size = 1; curr_size <= high; curr_size = 2*curr_size)
+        {
+            // Pick starting point of different subarrays of current size
+            for (int low = 0; low < high; low += 2*curr_size)
+            {
+                // Find ending point of left subarray. mid+1 is starting point of right
+                int mid = Math.min(low + curr_size - 1, high);
+                int right_end = Math.min(low + 2*curr_size - 1, high);
 
-        //todo: implement the sort
-        return null;
+                a = merge(a, low, mid, right_end);
+            }
+        }
+        return a;
     }//end mergesortIterative
 
 
