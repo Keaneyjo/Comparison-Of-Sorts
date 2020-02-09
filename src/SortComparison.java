@@ -1,5 +1,13 @@
 // -------------------------------------------------------------------------
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.util.Scanner;
+
+
+
+
 /**
  *  This class contains static methods that implementing sorting of an array of numbers
  *  using different sort algorithms.
@@ -126,10 +134,8 @@ class SortComparison {
     static double[] mergeSortIterative (double a[], int high) {
         for (int curr_size = 1; curr_size <= high; curr_size = 2*curr_size)
         {
-            // Pick starting point of different subarrays of current size
             for (int low = 0; low < high; low += 2*curr_size)
             {
-                // Find ending point of left subarray. mid+1 is starting point of right
                 int mid = Math.min(low + curr_size - 1, high);
                 int right_end = Math.min(low + 2*curr_size - 1, high);
 
@@ -203,9 +209,314 @@ class SortComparison {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
-        //todo: do experiments as per assignment instructions
+        ten_random_test();
+        one_hundred_random_test();
+        one_thousand_random_test();
+        one_thousand_few_unique();
+        one_thousand_nearly();
+        one_thousand_reverse();
+        one_thousand_sorted();
+
     }
 
+    public static void ten_random_test() throws FileNotFoundException {
+
+        long start = System.nanoTime();
+        long finish = System.nanoTime();
+        long timeElapsed = finish - start;
+
+        Scanner scanner = new Scanner(new File("C:/Users/John/IdeaProjects/Algorithms-SortingComparison/assignment input data files/numbers10.txt"));
+        double [] test10 = new double [10];
+        int i = 0;
+        while(scanner.hasNextInt()){
+            test10[i++] = scanner.nextDouble();
+        }        //todo: do experiments as per assignment instructions
+        double [] clone_test10 = new double[10];
+
+        start = System.nanoTime();
+        clone_test10 = insertionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("10-Insertion: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = selectionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("10-Selection: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortIterative(test10, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("10-Merge_Iterative: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortRecursive(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("10-Merge_Recursive: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = quickSort(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("10-Quick: " + (finish - start));
+
+        System.out.print("\n\n");
+    }
+
+    public static void one_hundred_random_test() throws FileNotFoundException {
+
+        long start = System.nanoTime();
+        long finish = System.nanoTime();
+        long timeElapsed = finish - start;
+
+        Scanner scanner = new Scanner(new File("C:/Users/John/IdeaProjects/Algorithms-SortingComparison/assignment input data files/numbers100.txt"));
+        double [] test10 = new double [100];
+        int i = 0;
+        while(scanner.hasNextInt()){
+            test10[i++] = scanner.nextDouble();
+        }        //todo: do experiments as per assignment instructions
+        double [] clone_test10 = new double[100];
+
+        start = System.nanoTime();
+        clone_test10 = insertionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("100-Insertion: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = selectionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("100-Selection: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortIterative(test10, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("100-Merge_Iterative: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortRecursive(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("100-Merge_Recursive: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = quickSort(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("100-Quick: " + (finish - start));
+
+        System.out.print("\n\n");
+    }
+
+    public static void one_thousand_random_test() throws FileNotFoundException {
+
+        long start = System.nanoTime();
+        long finish = System.nanoTime();
+        long timeElapsed = finish - start;
+
+        Scanner scanner = new Scanner(new File("C:/Users/John/IdeaProjects/Algorithms-SortingComparison/assignment input data files/numbers1000.txt"));
+        double [] test10 = new double [1000];
+        int i = 0;
+        while(scanner.hasNextInt()){
+            test10[i++] = scanner.nextDouble();
+        }        //todo: do experiments as per assignment instructions
+        double [] clone_test10 = new double[1000];
+
+        start = System.nanoTime();
+        clone_test10 = insertionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("1000-Insertion: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = selectionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("1000-Selection: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortIterative(test10, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("1000-Merge_Iterative: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortRecursive(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("1000-Merge_Recursive: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = quickSort(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("1000-Quick: " + (finish - start));
+
+        System.out.print("\n\n");
+    }
+
+    public static void one_thousand_few_unique() throws FileNotFoundException {
+
+        long start = System.nanoTime();
+        long finish = System.nanoTime();
+        long timeElapsed = finish - start;
+
+        Scanner scanner = new Scanner(new File("C:/Users/John/IdeaProjects/Algorithms-SortingComparison/assignment input data files/numbers1000Duplicates.txt"));
+        double [] test10 = new double [1000];
+        int i = 0;
+        while(scanner.hasNextInt()){
+            test10[i++] = scanner.nextDouble();
+        }        //todo: do experiments as per assignment instructions
+        double [] clone_test10 = new double[1000];
+
+        start = System.nanoTime();
+        clone_test10 = insertionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("Unique-Insertion: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = selectionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("Unique-Selection: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortIterative(test10, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Unique-Merge_Iterative: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortRecursive(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Unique-Merge_Iterative: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = quickSort(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Unique-Quick: " + (finish - start));
+
+        System.out.print("\n\n");
+    }
+
+    public static void one_thousand_nearly() throws FileNotFoundException {
+
+        long start = System.nanoTime();
+        long finish = System.nanoTime();
+        long timeElapsed = finish - start;
+
+        Scanner scanner = new Scanner(new File("C:/Users/John/IdeaProjects/Algorithms-SortingComparison/assignment input data files/numbersNearlyOrdered1000.txt"));
+        double [] test10 = new double [1000];
+        int i = 0;
+        while(scanner.hasNextInt()){
+            test10[i++] = scanner.nextDouble();
+        }        //todo: do experiments as per assignment instructions
+        double [] clone_test10 = new double[1000];
+
+        start = System.nanoTime();
+        clone_test10 = insertionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("Nearly-Insertion: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = selectionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("Nearly-Selection: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortIterative(test10, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Nearly-Merge_Iterative: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortRecursive(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Nearly-Merge_Iterative: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = quickSort(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Nearly-Quick: " + (finish - start));
+
+        System.out.print("\n\n");
+    }
+
+    public static void one_thousand_reverse() throws FileNotFoundException {
+
+        long start = System.nanoTime();
+        long finish = System.nanoTime();
+        long timeElapsed = finish - start;
+
+        Scanner scanner = new Scanner(new File("C:/Users/John/IdeaProjects/Algorithms-SortingComparison/assignment input data files/numbersReverse1000.txt"));
+        double [] test10 = new double [1000];
+        int i = 0;
+        while(scanner.hasNextInt()){
+            test10[i++] = scanner.nextDouble();
+        }        //todo: do experiments as per assignment instructions
+        double [] clone_test10 = new double[1000];
+
+        start = System.nanoTime();
+        clone_test10 = insertionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("Reverse-Insertion: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = selectionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("Reverse-Selection: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortIterative(test10, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Reverse-Merge_Iterative: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortRecursive(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Reverse-Merge_Iterative: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = quickSort(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Reverse-Quick: " + (finish - start));
+
+        System.out.print("\n\n");
+    }
+
+    public static void one_thousand_sorted() throws FileNotFoundException {
+
+        long start = System.nanoTime();
+        long finish = System.nanoTime();
+        long timeElapsed = finish - start;
+
+        Scanner scanner = new Scanner(new File("C:/Users/John/IdeaProjects/Algorithms-SortingComparison/assignment input data files/numbersSorted1000.txt"));
+        double [] test10 = new double [1000];
+        int i = 0;
+        while(scanner.hasNextInt()){
+            test10[i++] = scanner.nextDouble();
+        }        //todo: do experiments as per assignment instructions
+        double [] clone_test10 = new double[1000];
+
+        //Test
+        start = System.nanoTime();
+        finish = System.nanoTime();
+        timeElapsed = finish - start;
+
+        start = System.nanoTime();
+        clone_test10 = insertionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("Sorted-Insertion: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = selectionSort(test10);
+        finish = System.nanoTime();
+        System.out.println("Sorted-Selection: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortIterative(test10, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Sorted-Merge_Iterative: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = mergeSortRecursive(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Sorted-Merge_Iterative: " + (finish - start));
+
+        start = System.nanoTime();
+        clone_test10 = quickSort(test10, 0, test10.length-1);
+        finish = System.nanoTime();
+        System.out.println("Sorted-Quick: " + (finish - start));
+
+        System.out.print("\n\n");
+    }
 }//end class
