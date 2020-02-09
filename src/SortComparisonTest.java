@@ -93,9 +93,9 @@ public class SortComparisonTest
     @Test
     public void testMergeSortRecursive()
     {
-        double[] a = new double[] {1, 3, 2, 4, 0};
-        a = SortComparison.mergeSortRecursive(a);
-        double[] result = new double[] {0, 1, 2, 3, 4};
+        double[] a = new double[] {1, 3, 2, 4, 0, 5};
+        a = SortComparison.mergeSortRecursive(a, 0, a.length-1);
+        double[] result = new double[] {0, 1, 2, 3, 4, 5};
         Assert.assertArrayEquals("Merge Sort Recursive: True", result, a, 0);
     }
 

@@ -138,12 +138,54 @@ class SortComparison {
      * @param a: An unsorted array of doubles.
      * @return after the method returns, the array must be in ascending sorted order.
      */
-    static double[] mergeSortRecursive (double a[]) {
-
-
-        //todo: implement the sort
-        return null;
+    static double[] mergeSortRecursive (double a[], int low, int high) {
+        if(low < high)
+        {
+            int q = (low + high)/2;
+            a = mergeSortRecursive(a, low, q);
+            a = mergeSortRecursive(a, q+1, high);
+            a = merge(a, low, q, high);
+        }
+        return a;
     }//end mergeSortRecursive
+
+    static double [] merge (double a[], int low, int halfPoint, int high)
+    {
+        double [] firstArray = new double[halfPoint - low + 1];
+        double [] secondArray = new double[high - halfPoint];
+        System.arraycopy(a, low, firstArray, 0, firstArray.length);
+        System.arraycopy(a, halfPoint+1, secondArray, 0, secondArray.length);
+        int i = 0;
+        int j = 0;
+        int k = low;
+        while ((i < halfPoint - low + 1) && (j < high - halfPoint))
+        {
+            if(firstArray[i] <= secondArray[j])
+            {
+                a[k] = firstArray[i];
+                i++;
+            }
+            else
+            {
+                a[k] = secondArray[j];
+                j++;
+            }
+            k++;
+        }
+        while (i < halfPoint - low + 1)
+        {
+            a[k] = firstArray[i];
+            i++;
+            k++;
+        }
+        while (j < high - halfPoint)
+        {
+            a[k] = secondArray[j];
+            j++;
+            k++;
+        }
+        return a;
+    }
 
 
 
