@@ -2,10 +2,10 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Scanner;
 
-
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -59,7 +59,10 @@ class SortComparison {
                     temp = j;
                 }
             }
-            if(temp != i) { a = swap(a, i, temp); }
+            if(temp != i) {
+                double temp2 = a[i];
+                a[i] = a[temp];
+                a[temp] = temp2; }
         }
         return a;
     }//end selectionsort
@@ -83,17 +86,6 @@ class SortComparison {
 
     private static int partition (double a[], int low, int high)
     {
-        /*
-        Step 1 − Choose the highest index value has pivot
-        Step 2 − Take two variables to point left and right of the list excluding pivot
-        Step 3 − left points to the low index
-        Step 4 − right points to the high
-        Step 5 − while value at left is less than pivot move right
-        Step 6 − while value at right is greater than pivot move left
-        Step 7 − if both step 5 and step 6 does not match swap left and right
-        Step 8 − if left ≥ right, the point where they met is new pivot
-         */
-
         double pivot = a[high];
         int i = low-1;
         for(int j = low; j < high -1; j++)
@@ -101,10 +93,14 @@ class SortComparison {
             if(a[j] <= pivot)
             {
                 i++;
-                a = swap(a, i, j);
+                double temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
             }
         }
-        a = swap(a, i+1, high);
+        double temp = a[i+1];
+        a[i+1] = a[high];
+        a[high] = temp;;
         return i+1;
     }
 
@@ -282,25 +278,25 @@ class SortComparison {
         finish = System.nanoTime();
         System.out.println("100-Insertion: " + (finish - start));
 
-        start = System.nanoTime();
+        long start1 = System.nanoTime();
         clone_test10 = selectionSort(test10);
-        finish = System.nanoTime();
-        System.out.println("100-Selection: " + (finish - start));
+        long finish1 = System.nanoTime();
+        System.out.println("100-Selection: " + (finish1 - start1));
 
-        start = System.nanoTime();
+        long start3 = System.nanoTime();
         clone_test10 = mergeSortIterative(test10, test10.length-1);
-        finish = System.nanoTime();
-        System.out.println("100-Merge_Iterative: " + (finish - start));
+        long finish3 = System.nanoTime();
+        System.out.println("100-Merge_Iterative: " + (finish3 - start3));
 
-        start = System.nanoTime();
+        long start4 = System.nanoTime();
         clone_test10 = mergeSortRecursive(test10, 0, test10.length-1);
-        finish = System.nanoTime();
-        System.out.println("100-Merge_Recursive: " + (finish - start));
+        long finish4 = System.nanoTime();
+        System.out.println("100-Merge_Recursive: " + (finish4 - start4));
 
-        start = System.nanoTime();
+        long start5 = System.nanoTime();
         clone_test10 = quickSort(test10, 0, test10.length-1);
-        finish = System.nanoTime();
-        System.out.println("100-Quick: " + (finish - start));
+        long finish5 = System.nanoTime();
+        System.out.println("100-Quick: " + (finish5 - start5));
 
         System.out.print("\n\n");
     }
@@ -367,26 +363,31 @@ class SortComparison {
         System.out.println("Unique-Insertion: " + (finish - start));
 
         start = System.nanoTime();
-        clone_test10 = selectionSort(test10);
+        double [] clone_test101 = selectionSort(test10);
         finish = System.nanoTime();
         System.out.println("Unique-Selection: " + (finish - start));
 
         start = System.nanoTime();
-        clone_test10 = mergeSortIterative(test10, test10.length-1);
+        double [] clone_test102 = mergeSortIterative(test10, test10.length-1);
         finish = System.nanoTime();
         System.out.println("Unique-Merge_Iterative: " + (finish - start));
 
         start = System.nanoTime();
-        clone_test10 = mergeSortRecursive(test10, 0, test10.length-1);
+        double [] clone_test103 = mergeSortRecursive(test10, 0, test10.length-1);
         finish = System.nanoTime();
         System.out.println("Unique-Merge_Iterative: " + (finish - start));
 
         start = System.nanoTime();
-        clone_test10 = quickSort(test10, 0, test10.length-1);
+        double [] clone_test104 = quickSort(test10, 0, test10.length-1);
         finish = System.nanoTime();
         System.out.println("Unique-Quick: " + (finish - start));
 
         System.out.print("\n\n");
+        // Compares arrays to see if they have been truly sorted correctly
+        System.out.println("one: " + Arrays.equals(clone_test10, clone_test101));
+        System.out.println("two: " + Arrays.equals(clone_test102, clone_test103));
+        System.out.println("three: " + Arrays.equals(clone_test102, clone_test104));
+
     }
 
     public static void one_thousand_nearly() throws FileNotFoundException {
