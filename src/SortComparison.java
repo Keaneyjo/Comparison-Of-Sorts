@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import java.util.concurrent.TimeUnit;
-
 
 /**
  *  This class contains static methods that implementing sorting of an array of numbers
@@ -26,7 +24,7 @@ class SortComparison {
      * @return array sorted in ascending order.
      *
      */
-    static double [] insertionSort (double a[]){
+    static double [] insertionSort (double[] a){
         for(int i = 1; i < a.length; i++)
         {
             double key = a[i];
@@ -39,7 +37,7 @@ class SortComparison {
             a[j+1] = key;
         }
         return a;
-    }//end insertionsort
+    }//end insertionSort
 
     /**
      * Sorts an array of doubles using Selection Sort.
@@ -48,7 +46,7 @@ class SortComparison {
      * @return array sorted in ascending order
      *
      */
-    static double [] selectionSort (double a[]){
+    static double [] selectionSort (double[] a){
         for(int i = 0; i < (a.length-1 ); i++)
         {
             int temp = i;
@@ -65,7 +63,7 @@ class SortComparison {
                 a[temp] = temp2; }
         }
         return a;
-    }//end selectionsort
+    }//end selectionSort
 
     /**
      * Sorts an array of doubles using Quick Sort.
@@ -82,9 +80,9 @@ class SortComparison {
             a = quickSort(a, q + 1, high);
         }
         return a;
-    }//end quicksort
+    }//end quickSort
 
-    private static int partition (double a[], int low, int high)
+    private static int partition (double[] a, int low, int high)
     {
         double pivot = a[high];
         int i = low-1;
@@ -93,14 +91,10 @@ class SortComparison {
             if(a[j] <= pivot)
             {
                 i++;
-                double temp = a[i];
-                a[i] = a[j];
-                a[j] = temp;
+                a = swap(a, i, j);
             }
         }
-        double temp = a[i+1];
-        a[i+1] = a[high];
-        a[high] = temp;;
+        a = swap(a, i+1, high);
         return i+1;
     }
 
