@@ -6,6 +6,11 @@ import java.nio.file.Paths;
 
 
 /**
+ * Link to my Github repository containing a history of my commits: https://github.com/Keaneyjo/Comparison-Of-Sorts
+ */
+
+
+/**
  *  This class contains static methods that implementing sorting of an array of numbers
  *  using different sort algorithms.
  *
@@ -25,7 +30,7 @@ import java.nio.file.Paths;
      1000 sorted	        | 7600ns	    | 1302600ns		|    134800ns          | 214600ns               | 312340ns
  */
 
-/**
+/** Questions:
  a. Which of the sorting algorithms does the order of input have an impact on? Why?
  - The sorting algorithm where the order of input has the largest effect is Insertion sort. This is because it is quadratic.
 
@@ -45,6 +50,9 @@ import java.nio.file.Paths;
  e. Which algorithm is the fastest for each of the 7 input files?
  - In general in seems that Merge Sort Recursive is the fastest.
  */
+
+
+
 class SortComparison {
 
     /**
